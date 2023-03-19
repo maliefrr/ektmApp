@@ -14,11 +14,14 @@ const LoginPage = (props) => {
                 username,password
             })
             const mahasiswaData = await axios.get(`https://ektm-backend.up.railway.app/api/mahasiswa/profile/${response.data.data.username}`)
-            props.navigation.navigate("Dashboard",{
-                name : mahasiswaData.data.mahasiswa.name,
-                nim: mahasiswaData.data.mahasiswa.nim,
-                image: mahasiswaData.data.mahasiswa.pas_foto,
-                prodi: mahasiswaData.data.mahasiswa.prodi
+            props.navigation.navigate("DashboardStack",{
+                screen: "Dashboard",
+                params: {
+                    name : mahasiswaData.data.mahasiswa.name,
+                    nim: mahasiswaData.data.mahasiswa.nim,
+                    image: mahasiswaData.data.mahasiswa.pas_foto,
+                    prodi: mahasiswaData.data.mahasiswa.prodi
+                }
             })
         } catch (error) {
             Toast.show({

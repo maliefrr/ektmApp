@@ -1,26 +1,27 @@
 import React,{ useState } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
-import { View, Text, StyleSheet, Image, Modal, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, Dimensions} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-const DashboardScreen = ({route}) => {
+
+const DashboardScreen = ({route,navigation}) => {
     const {name,nim,prodi,image} = route.params;
     const [isVisible, setIsVisible] = useState(false);
-    const [isMenuVisible, setIsMenuVisible] = useState(false);
-    const toggleModal = () => {
-        setIsVisible(!isVisible);
-    }
-    const url = `https://ektm.netlify.app/profile/${nim}`
+    const url = `https://ektm.netlify.app/profile/${nim}`;
+    const handleChangePassword = () => {
+        // your change password code here
+    };
+    
     return (
         <View style={styles.container}>
-            <LinearGradient colors={['#4569e8', '#43cacb']} style={styles.gradient} />
+            <View style={styles.cardContainer}>
             <View style={styles.profileContainer}>
                 <Image style={styles.profileImage} source={{ uri: `${image}` }} />
-                <Text style={styles.profileName}>{name}</Text>
             </View>
             <View style={styles.biodataContainer}>
+                <Text style={styles.profileName}>{name}</Text>
                 <Text style={styles.biodataText}>NIM: {nim}</Text>
                 <Text style={styles.biodataText}>Program Studi: {prodi}</Text>
+            </View>
             </View>
             <TouchableOpacity style={styles.button} onPress={() => setIsVisible(!isVisible)}>
                 <Text style={styles.buttonTitle}>Show QR</Text>
@@ -38,23 +39,35 @@ const DashboardScreen = ({route}) => {
         </View>
     );
 };
+    const cardWidth = 85 * 4;
+    const cardHeight = 54 * 4;
+    const { height } = Dimensions.get('window');
+    const vh = height / 100;
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop: 10,
         alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#ffffff'
+    },
+    cardContainer: {
+        width: cardWidth,
+        height: cardHeight,
+        marginTop: 4 * vh,
+        backgroundColor: 'red'
     },
     profileContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        display: 'flex',
+        backgroundColor: '#cacaca',
+        justifyContent: "flex-end",
+        flexDirection: 'row',
         marginBottom: 20,
     },
     profileImage: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        borderWidth: 1,
+        width: 80,
+        height: 80,
         backgroundColor: "white"
     },
     profileName: {
@@ -99,21 +112,57 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     modalContent: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     closeButton: {
         backgroundColor: '#2196F3',
         padding: 10,
         borderRadius: 5,
         marginTop: 20,
+        width: '50%'
     },
     closeButtonText: {
         color: 'white',
         fontSize: 18,
+    },
+    menuContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        width: '70%',
+        backgroundColor: '#ffffff',
+        paddingTop: 50,
+        paddingHorizontal: 20,
+        
+    },
+    menuItem: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginVertical: 10,
+    },
+    logoutButton: {
+        backgroundColor: '#ec8213',
+        borderRadius: 25,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 30,
+    },
+    logoutButtonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#ffffff',
+    },
+    menuButton: {
+        position: 'absolute',
+        top: 40,
+        left: 20,
+        zIndex: 1,
     },
 });
 
