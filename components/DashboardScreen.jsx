@@ -7,21 +7,24 @@ const DashboardScreen = ({route,navigation}) => {
     const {name,nim,prodi,image} = route.params;
     const [isVisible, setIsVisible] = useState(false);
     const url = `https://ektm.netlify.app/profile/${nim}`;
-    const handleChangePassword = () => {
-        // your change password code here
-    };
-    
     return (
         <View style={styles.container}>
             <View style={styles.cardContainer}>
-            <View style={styles.profileContainer}>
-                <Image style={styles.profileImage} source={{ uri: `${image}` }} />
-            </View>
-            <View style={styles.biodataContainer}>
-                <Text style={styles.profileName}>{name}</Text>
-                <Text style={styles.biodataText}>NIM: {nim}</Text>
-                <Text style={styles.biodataText}>Program Studi: {prodi}</Text>
-            </View>
+                <View style={styles.header}>
+                    <Image style={styles.logo} source={require("../assets/logo-uho.png")} />
+                    <View>
+                        <Text style={styles.headerText}>Universitas Halu Oleo</Text>
+                        <Text style={styles.headerText}>Kartu Tanda Mahasiswa</Text>
+                    </View>
+                </View>
+                <View style={styles.profileContainer}>
+                    <Image style={styles.profileImage} source={{ uri: `${image}` }} />
+                </View>
+                <View style={styles.biodataContainer}>
+                    <Text style={styles.biodataText}>{name}</Text>
+                    <Text style={styles.nim}>{nim}</Text>
+                    <Text style={styles.biodataText}>{prodi}</Text>
+                </View>
             </View>
             <TouchableOpacity style={styles.button} onPress={() => setIsVisible(!isVisible)}>
                 <Text style={styles.buttonTitle}>Show QR</Text>
@@ -56,32 +59,33 @@ const styles = StyleSheet.create({
         width: cardWidth,
         height: cardHeight,
         marginTop: 4 * vh,
-        backgroundColor: 'red'
     },
     profileContainer: {
         display: 'flex',
-        backgroundColor: '#cacaca',
         justifyContent: "flex-end",
         flexDirection: 'row',
-        marginBottom: 20,
     },
     profileImage: {
-        width: 80,
-        height: 80,
-        backgroundColor: "white"
+        width: 60,
+        height: 60,
+        marginRight: 30
     },
-    profileName: {
-        fontSize: 20,
+    logo: {
+        width: 35,
+        height: 35,
+        marginRight: 10
+    },
+    nim: {
+        fontSize: 18,
         fontWeight: 'bold',
-        marginTop: 10,
     },
     biodataContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        marginTop: 3,
+        marginLeft: 20,
+        maxWidth: 0.5 * cardWidth
     },
     biodataText: {
-        fontSize: 16,
-        marginVertical: 5,
+        fontSize: 15,
     },
     gradient: {
         position: 'absolute',
@@ -164,6 +168,19 @@ const styles = StyleSheet.create({
         left: 20,
         zIndex: 1,
     },
+    header: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 20,
+        marginLeft: 20,
+        marginBottom: 6
+    },
+    headerText: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "black"
+    }
 });
 
 export default DashboardScreen;
