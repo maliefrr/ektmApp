@@ -1,5 +1,6 @@
 import React,{ useState } from 'react';
-import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, Dimensions} from 'react-native';
+import { View, Text, StyleSheet, Modal, TouchableOpacity} from 'react-native';
+import Ktm from './Ktm';
 import QRCode from 'react-native-qrcode-svg';
 
 
@@ -9,23 +10,7 @@ const DashboardScreen = ({route,navigation}) => {
     const url = `https://ektm.netlify.app/profile/${nim}`;
     return (
         <View style={styles.container}>
-            <View style={styles.cardContainer}>
-                <View style={styles.header}>
-                    <Image style={styles.logo} source={require("../assets/logo-uho.png")} />
-                    <View>
-                        <Text style={styles.headerText}>Universitas Halu Oleo</Text>
-                        <Text style={styles.headerText}>Kartu Tanda Mahasiswa</Text>
-                    </View>
-                </View>
-                <View style={styles.profileContainer}>
-                    <Image style={styles.profileImage} source={{ uri: `${image}` }} />
-                </View>
-                <View style={styles.biodataContainer}>
-                    <Text style={styles.biodataText}>{name}</Text>
-                    <Text style={styles.nim}>{nim}</Text>
-                    <Text style={styles.biodataText}>{prodi}</Text>
-                </View>
-            </View>
+            <Ktm name={name} nim={nim} image={image} prodi={prodi}/>
             <TouchableOpacity style={styles.button} onPress={() => setIsVisible(!isVisible)}>
                 <Text style={styles.buttonTitle}>Show QR</Text>
             </TouchableOpacity>
@@ -42,10 +27,7 @@ const DashboardScreen = ({route,navigation}) => {
         </View>
     );
 };
-    const cardWidth = 85 * 4;
-    const cardHeight = 54 * 4;
-    const { height } = Dimensions.get('window');
-    const vh = height / 100;
+
 
 
 const styles = StyleSheet.create({
@@ -54,45 +36,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         alignItems: 'center',
         backgroundColor: '#ffffff'
-    },
-    cardContainer: {
-        width: cardWidth,
-        height: cardHeight,
-        marginTop: 4 * vh,
-    },
-    profileContainer: {
-        display: 'flex',
-        justifyContent: "flex-end",
-        flexDirection: 'row',
-    },
-    profileImage: {
-        width: 60,
-        height: 60,
-        marginRight: 30
-    },
-    logo: {
-        width: 35,
-        height: 35,
-        marginRight: 10
-    },
-    nim: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    biodataContainer: {
-        marginTop: 3,
-        marginLeft: 20,
-        maxWidth: 0.5 * cardWidth
-    },
-    biodataText: {
-        fontSize: 15,
-    },
-    gradient: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
     },
     button: {
         width: '60%',
@@ -172,7 +115,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 20,
+        marginTop: 15,
         marginLeft: 20,
         marginBottom: 6
     },
