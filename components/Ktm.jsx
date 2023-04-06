@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Image, Dimensions, ImageBackground} from 'react
 const Ktm = (props) => {
   return (
     <View style={styles.cardContainer}>
+        <ImageBackground source={require("../assets/ktm-bg.png")}>
     <View style={styles.header}>
         <Image style={styles.logo} source={require("../assets/logo-uho.png")} />
         <View>
@@ -19,6 +20,7 @@ const Ktm = (props) => {
         <Text style={styles.nim}>{props.nim}</Text>
         <Text style={styles.biodataText}>{props.prodi}</Text>
     </View>
+    </ImageBackground>
 </View>
   )
 }
